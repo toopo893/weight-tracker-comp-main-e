@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>設定 - 体重維持アプリ</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+
+<body>
+    <div class="container">
+        <!-- ヘッダーの挿入 -->
+        <div th:replace="fragments/header :: header"></div>
+
+        <div class="content">
+            <h1>設定</h1>
+
+            <div class="card">
+                <h2>目標体重</h2>
+                <form th:action="@{/settings/target-weight}" method="post">
+                    <div class="form-group">
+                        <label for="targetWeight">目標体重 (kg):</label>
+                        <input type="number" id="targetWeight" name="targetWeight" step="0.1" min="30" max="200"
+                            th:value="${user != null && user.targetWeight != null ? user.targetWeight : ''}" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">保存</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="card">
+                <h2>アカウント情報</h2>
+                <table class="info-table">
+                    <tr>
+                        <th>ユーザー名</th>
+                        <td th:text="${user.username}">username</td>
+                    </tr>
+                    <tr>
+                        <th>メールアドレス</th>
+                        <td th:text="${user.email}">email@example.com</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div th:replace="fragments/footer :: footer"></div>
+    </div>
+</body>
+
+</html>
